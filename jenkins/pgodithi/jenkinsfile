@@ -1,0 +1,93 @@
+lib = library(identifier: "jenkins@20211123", retriever: legacySCM(scm))
+def FAILED_STAGE
+def ERROR
+pipeline {
+    agent none
+    environment {
+        AGENT_X64 = 'Jenkins-Agent-al2-x64-c54xlarge-Docker-Host'
+        AGENT_ARM64 = 'Jenkins-Agent-al2-arm64-c6g4xlarge-Docker-Host'
+        INTEG_TEST_JOB_NAME = 'test'
+    }
+    stages {
+        stage('detect docker image + args') {
+            agent {
+                docker {
+                    label 'Jenkins-Agent-al2-x64-c54xlarge-Docker-Host'
+                    image 'opensearchstaging/ci-runner:centos7-x64-arm64-jdkmulti-node10.24.1-cypress6.9.1-20211028'
+                    alwaysPull true
+                }
+            }
+            steps {
+                script {
+                    FAILED_STAGE=env.STAGE_NAME
+                    try {
+                        sh " Sample stage detect docker image + args"
+                    }
+                    catch (Exception e) {
+                        ERROR=e.toString()
+                        echo 'Exception occurred: ' + e.toString()
+                        sh "exit 1"
+                    }
+                    
+                }
+            }
+        }
+        stage('docker build') {
+            steps {
+                node('Jenkins-Agent-al2-x64-c54xlarge-Docker-Host') {
+                    script {
+                        FAILED_STAGE=env.STAGE_NAME
+                        try {
+                            echo "test"
+                        }
+                        catch (Exception e) {
+                            ERROR=e.toString()
+                            echo 'Exception occurred: ' + e.toString()
+                            sh "exit 1"
+                        }
+                        
+                    
+                    }
+                }
+            }
+        }
+    }
+    post {
+        success {
+            node(AGENT_X64) {
+                script {
+                    //def log = currentBuild.rawBuild.getLog(100).join('\n')
+                    def log = "Build Failed at Stage: " + FAILED_STAGE + " with error: " + ERROR
+                    println(log)
+                    publishNotification(
+                        icon: ':white_check_mark:',
+                        message: log,
+                        extra: "test",
+                        credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
+                        manifest: "Test Manifest"
+                    )
+
+                    postCleanup()
+                }
+            }
+        }
+        failure {
+            node(AGENT_X64) {
+                script {
+                    def log = "build failed at stage: " + FAILED_STAGE + " with error: " + ERROR
+                    println(log)
+                    publishNotification(
+                        icon: ':warning:',
+                        message: log,
+                        credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
+                        manifest: "Test Manifest"
+                    )
+
+                    postCleanup()
+                }
+            }
+        }
+    }
+}
+
+
