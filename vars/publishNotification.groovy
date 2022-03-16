@@ -3,7 +3,7 @@ void call(Map args = [:]) {
         "${args.icon}", 
         "JOB_NAME=${JOB_NAME}",
         "BUILD_NUMBER=[${BUILD_NUMBER}]",
-        "MESSAGE=${args.message}",
+        "MESSAGE=${args.messages}",
         "Build: ${BUILD_URL}",
         args.manifest,
         args.extra
@@ -18,4 +18,3 @@ void call(Map args = [:]) {
         ].join(' '))
     }
 }
-
