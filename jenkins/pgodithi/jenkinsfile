@@ -61,7 +61,7 @@ pipeline {
                     println(log)
                     publishNotification(
                         icon: ':white_check_mark:',
-                        message: log,
+                        messages: log,
                         extra: "test",
                         credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                         manifest: "Test Manifest"
@@ -78,7 +78,7 @@ pipeline {
                     println(log)
                     publishNotification(
                         icon: ':warning:',
-                        message: log,
+                        messages: log,
                         credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                         manifest: "Test Manifest"
                     )
