@@ -260,7 +260,8 @@ pipeline {
                     def BUILD_STRING3 = "Error"
                     def BUILD_STRING4 = "Failed"
                     String message = ""
-                    def log = currentBuild.rawBuild.getLog()
+                    def log = currentBuild.rawBuild.getLog().join('\n')
+                    println("the log"+log)
                     log.eachLine{ line ->if (line =~ /$BUILD_STRING1/ || line =~ /$BUILD_STRING2/ || line =~ /$BUILD_STRING3/  || line =~ /$BUILD_STRING4/ ) 
                        {
                         println "error: $line"  
