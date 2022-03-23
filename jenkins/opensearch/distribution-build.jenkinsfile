@@ -273,7 +273,7 @@ pipeline {
 
 @NonCPS
 def get_results(){
-    def BUILD_STRING1 = "Error building"
+    def BUILD_STRING1 = "ERROR"
     /*def BUILD_STRING2 = "ERROR"
     def BUILD_STRING3 = "Error"
     def BUILD_STRING4 = "Failed"*/
@@ -282,7 +282,7 @@ def get_results(){
     def message_list= []
     def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
     performance_log.eachLine() { line ->
-        if (line.matches(".*$BUILD_STRING1.*")) {
+        if (line.matches("$BUILD_STRING1.*")) {
             //message+=(line+delimiter)
             message_list.add(line)
         }
