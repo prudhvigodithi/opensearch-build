@@ -255,10 +255,22 @@ pipeline {
         aborted {
             node(AGENT_X64) {
                 script {
+                    def BUILD_STRING1 = "Caused:"
+                    def BUILD_STRING2 = "ERROR:"
+                    def BUILD_STRING3 = "Error"
+                    def BUILD_STRING4 = "Failed"
+                    String message = ""
+                    def log = currentBuild.rawBuild.getLog()
+                    log.eachLine{ line ->if (line =~ /$BUILD_STRING1/ || line =~ /$BUILD_STRING2/ || line =~ /$BUILD_STRING3/  || line =~ /$BUILD_STRING4/ ) 
+                       {
+                        println "error: $line"  
+                        message+=$line
+                       }
+                    }
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':warning:',
-                            message: 'Failed Build',
+                            messages: message,
                             credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                             manifest: "${INPUT_MANIFEST}"
                         )
