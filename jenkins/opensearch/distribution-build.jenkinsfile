@@ -256,10 +256,11 @@ pipeline {
             node(AGENT_X64) {
                 script {
                     def job_log = get_results()
+                    println("The job log ##### is "+job_log)
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':warning:',
-                            messages: job_log,
+                            messages: " ",
                             credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                             manifest: "${INPUT_MANIFEST}"
                         )
