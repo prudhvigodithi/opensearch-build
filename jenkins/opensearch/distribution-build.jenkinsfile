@@ -290,16 +290,16 @@ pipeline {
 
 @NonCPS
 def get_results(){
-    def BUILD_STRING1 = "Caused"
-    def BUILD_STRING2 = "ERROR"
+    def BUILD_STRING1 = "Error building"
+    /*def BUILD_STRING2 = "ERROR"
     def BUILD_STRING3 = "Error"
-    def BUILD_STRING4 = "Failed"
+    def BUILD_STRING4 = "Failed"*/
     def message = " "
     String delimiter = " ,"
     def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
     performance_log.eachLine() { line ->
         echo "The exact is Line: ${line}"
-        if (line.matches(".*$BUILD_STRING1.*|.*$BUILD_STRING2.*|.*$BUILD_STRING3.*|.*$BUILD_STRING4.*")) {
+        if (line.matches(".*$BUILD_STRING1.*")) {
             message+=(delimiter+line)
         }
     }
