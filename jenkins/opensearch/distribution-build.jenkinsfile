@@ -255,24 +255,11 @@ pipeline {
         aborted {
             node(AGENT_X64) {
                 script {
-                    def BUILD_STRING1 = "Caused:"
-                    def BUILD_STRING2 = "ERROR:"
-                    def BUILD_STRING3 = "Error"
-                    def BUILD_STRING4 = "Failed"
-                    String message = ""
-                    def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
-                    //println("the log"+performance_log)
-                    /*performance_log.eachLine{ line ->if (line ==~ /$BUILD_STRING1/ || line ==~ /$BUILD_STRING2/ || line ==~ /$BUILD_STRING3/  || line ==~ /$BUILD_STRING4/ ) 
-                       {
-                        println "error: $line"  
-                        message+=$line
-                       }
-                    }*/
-                    performance_log.eachLine{ line ->println "The log lines are : $line" }
+                    def job_log = get_results()
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':warning:',
-                            messages: message,
+                            messages: job_log,
                             credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                             manifest: "${INPUT_MANIFEST}"
                         )
@@ -299,4 +286,14 @@ pipeline {
             }
         }
     }
+}
+
+@NonCPS
+def get_results(){
+    def BUILD_STRING1 = "Caused:"
+    def BUILD_STRING2 = "ERROR:"
+    def BUILD_STRING3 = "Error"
+    def BUILD_STRING4 = "Failed"
+    def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
+    return performance_log
 }
