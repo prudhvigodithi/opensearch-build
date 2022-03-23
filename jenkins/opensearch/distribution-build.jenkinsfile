@@ -238,10 +238,9 @@ pipeline {
                 script {
                     if (params.PUBLISH_NOTIFICATION) { 
                         def stashed = lib.jenkins.Messages.new(this).get(['build-and-test-x64', 'build-and-test-arm64'])
-
                         publishNotification(
                             icon: ':white_check_mark:',
-                            message: 'Successful Build',
+                            messages: "Build Passed",
                             extra: stashed,
                             credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                             manifest: "${INPUT_MANIFEST}"
@@ -272,10 +271,11 @@ pipeline {
         failure {
             node(AGENT_X64) {
                 script {
+                    def job_log = get_results()
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':alert:',
-                            message: 'Failed Build',
+                            messages: job_log,
                             credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                             manifest: "${INPUT_MANIFEST}"
                         )
