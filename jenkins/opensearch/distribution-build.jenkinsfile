@@ -278,15 +278,17 @@ def get_results(){
     def BUILD_STRING3 = "Error"
     def BUILD_STRING4 = "Failed"*/
     def message = " "
+    String delimiter = ","
     def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
     performance_log.eachLine() { line ->
         echo "The exact is Line: ${line}"
         if (line.matches("$BUILD_STRING1.*")) {
-            message+=('\n'line)
+            message+=(line+delimiter)
         }
         else {
             message='Build Failed'
         }
     }
+    message=message.replaceAll(",", "\n")
     return message
 }
