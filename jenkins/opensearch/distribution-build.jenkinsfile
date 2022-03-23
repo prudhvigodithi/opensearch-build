@@ -252,12 +252,28 @@ pipeline {
                 }
             }
         }
-        failure {
+        aborted {
             node(AGENT_X64) {
                 script {
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':warning:',
+                            message: 'Failed Build',
+                            credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
+                            manifest: "${INPUT_MANIFEST}"
+                        )
+                    }
+
+                    postCleanup()
+                }
+            }
+        }
+        failure {
+            node(AGENT_X64) {
+                script {
+                    if (params.PUBLISH_NOTIFICATION) { 
+                        publishNotification(
+                            icon: ':alert:',
                             message: 'Failed Build',
                             credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                             manifest: "${INPUT_MANIFEST}"
