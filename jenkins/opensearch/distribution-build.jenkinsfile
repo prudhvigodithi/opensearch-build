@@ -282,7 +282,6 @@ def get_results(){
     def message_list= []
     def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
     performance_log.eachLine() { line ->
-        echo "The exact is Line: ${line}"
         if (line.matches("\${BUILD_STRING1}(.*)")) {
             //message+=(line+delimiter)
             message_list.add(line)
