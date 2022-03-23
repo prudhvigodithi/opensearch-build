@@ -300,8 +300,8 @@ def get_results(){
     def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
     performance_log.eachLine() { line ->
         echo "The exact is Line: ${line}"
-        if (line.matches(".*$BUILD_STRING4.*")) {
-            message+=line
+        if (line.matches(".*$BUILD_STRING1.*|.*$BUILD_STRING2.*|.*$BUILD_STRING3.*|.*$BUILD_STRING4.*")) {
+            message+=\nline
         }
     }
     return message
