@@ -251,23 +251,6 @@ pipeline {
                 }
             }
         }
-        aborted {
-            node(AGENT_X64) {
-                script {
-                    def job_log = get_results()
-                    if (params.PUBLISH_NOTIFICATION) { 
-                        publishNotification(
-                            icon: ':warning:',
-                            messages: job_log,
-                            credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
-                            manifest: "${INPUT_MANIFEST}"
-                        )
-                    }
-
-                    postCleanup()
-                }
-            }
-        }
         failure {
             node(AGENT_X64) {
                 script {
@@ -301,6 +284,9 @@ def get_results(){
         echo "The exact is Line: ${line}"
         if (line.matches(".*$BUILD_STRING1.*")) {
             message+=(delimiter+line)
+        }
+        else {
+            message='Build Failed'
         }
     }
     return message
