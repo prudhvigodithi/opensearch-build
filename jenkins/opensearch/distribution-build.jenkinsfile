@@ -257,6 +257,7 @@ pipeline {
                 script {
                     def job_log = get_results()
                     println("The job log ##### is "+job_log)
+                    println("The end #####")
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':warning:',
