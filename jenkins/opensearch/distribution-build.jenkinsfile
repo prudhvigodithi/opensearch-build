@@ -273,7 +273,7 @@ pipeline {
 
 @NonCPS
 def get_results(){
-    def BUILD_STRING1 = "Error building"
+    def BUILD_STRING1 = "ERROR"
     /*def BUILD_STRING2 = "ERROR"
     def BUILD_STRING3 = "Error"
     def BUILD_STRING4 = "Failed"*/
