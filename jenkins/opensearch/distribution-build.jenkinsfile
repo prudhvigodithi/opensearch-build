@@ -262,12 +262,13 @@ pipeline {
                     String message = ""
                     def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
                     //println("the log"+performance_log)
-                    performance_log.eachLine{ line ->if (line ==~ /$BUILD_STRING1/ || line ==~ /$BUILD_STRING2/ || line ==~ /$BUILD_STRING3/  || line ==~ /$BUILD_STRING4/ ) 
+                    /*performance_log.eachLine{ line ->if (line ==~ /$BUILD_STRING1/ || line ==~ /$BUILD_STRING2/ || line ==~ /$BUILD_STRING3/  || line ==~ /$BUILD_STRING4/ ) 
                        {
                         println "error: $line"  
                         message+=$line
                        }
-                    }
+                    }*/
+                    performance_log.eachLine{ line ->println "The log lines are : $line" }
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':warning:',
