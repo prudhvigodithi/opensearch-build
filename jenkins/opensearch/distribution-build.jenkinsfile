@@ -288,7 +288,7 @@ def get_results(){
             message_list.add(line)
         }
         else {
-            message='Build Failed'
+            message='Build  Failed'
         }
     }
     //message=message.replaceAll(",", "\n")
