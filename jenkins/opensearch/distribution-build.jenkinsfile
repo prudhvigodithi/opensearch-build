@@ -287,4 +287,4 @@ def buildFailureMessage(){
         message="Build failed"
     }
     return message
-}*?
+}*/
