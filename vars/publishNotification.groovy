@@ -4,8 +4,8 @@ void call(Map args = [:]) {
         "JOB_NAME=${JOB_NAME}",
         "BUILD_NUMBER=[${BUILD_NUMBER}]",
         "MESSAGE=${args.messages}",
-        "Build: ${BUILD_URL}",
-        args.manifest,
+        "BUILD_URL: ${BUILD_URL}",
+        "MANIFEST: ${args.manifest}",
         args.extra
     ] - null).join("\n")
     withCredentials([string(credentialsId: args.credentialsId, variable: 'WEBHOOK_URL')]) {
