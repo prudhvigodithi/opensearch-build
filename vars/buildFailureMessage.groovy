@@ -1,4 +1,4 @@
-def buildFailureMessage(){
+def call(){
     def ERROR_STRING = "ERROR"
     def message = ""
     String delimiter = ","
