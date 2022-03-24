@@ -274,7 +274,7 @@ pipeline {
 @NonCPS
 def get_results(){
     def BUILD_STRING1 = "Error building"
-    def message = " "
+    def message = ""
     String delimiter = ","
     def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
     performance_log.eachLine() { line ->
@@ -283,5 +283,8 @@ def get_results(){
         }
     }
     message=message.replaceAll(",", "\n")
+    if(message.isEmpty()){
+        message="Build failed"
+    }
     return message
 }
