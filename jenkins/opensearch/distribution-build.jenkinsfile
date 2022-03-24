@@ -278,7 +278,7 @@ def get_results(){
     String delimiter = ","
     def performance_log = currentBuild.rawBuild.getLog(Integer.MAX_VALUE).join('\n')
     performance_log.eachLine() { line ->
-        if (line.matches("$ERROR_STRING.*")) {
+        if (line.matches(".*$ERROR_STRING.*")) {
             message+=(line+delimiter)
         }
     }
