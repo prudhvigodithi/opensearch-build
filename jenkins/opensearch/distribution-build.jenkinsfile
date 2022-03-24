@@ -254,11 +254,11 @@ pipeline {
         failure {
             node(AGENT_X64) {
                 script {
-                    //def job_log = get_results()
+                    def job_log = get_results()
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':alert:',
-                            messages: buildFailureMessage(),
+                            messages: job_log,
                             credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                             manifest: "${INPUT_MANIFEST}"
                         )
