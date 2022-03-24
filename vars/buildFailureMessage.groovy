@@ -1,3 +1,4 @@
+@NonCPS
 def call(){
     def ERROR_STRING = "ERROR"
     def message = ""
