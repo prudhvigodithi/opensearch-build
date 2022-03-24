@@ -254,7 +254,7 @@ pipeline {
         failure {
             node(AGENT_X64) {
                 script {
-                    def job_log = get_results()
+                    def job_log = buildFailureMessage()
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':alert:',
@@ -263,7 +263,6 @@ pipeline {
                             manifest: "${INPUT_MANIFEST}"
                         )
                     }
-
                     postCleanup()
                 }
             }
