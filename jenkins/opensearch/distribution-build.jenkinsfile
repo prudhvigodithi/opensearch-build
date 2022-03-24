@@ -254,11 +254,11 @@ pipeline {
         failure {
             node(AGENT_X64) {
                 script {
-                    def job_log = get_results()
+                    //def job_log = get_results()
                     if (params.PUBLISH_NOTIFICATION) { 
                         publishNotification(
                             icon: ':alert:',
-                            messages: job_log,
+                            messages: buildFailureMessage(),
                             credentialsId: 'BUILD_NOTICE_WEBHOOK_TEST',
                             manifest: "${INPUT_MANIFEST}"
                         )
@@ -271,8 +271,8 @@ pipeline {
     }
 }
 
-@NonCPS
-def get_results(){
+/*@NonCPS
+def buildFailureMessage(){
     def ERROR_STRING = "ERROR"
     def message = ""
     String delimiter = ","
@@ -287,4 +287,4 @@ def get_results(){
         message="Build failed"
     }
     return message
-}
+}*?
