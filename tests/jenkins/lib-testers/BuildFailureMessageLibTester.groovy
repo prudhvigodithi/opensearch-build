@@ -7,11 +7,21 @@ class BuildFailureMessageLibTester extends LibFunctionTester {
     public BuildFailureMessageLibTester() {}
 
 
+     void parameterInvariantsAssertions(call) {
+          //N/A
+     }
+
+     boolean expectedParametersMatcher(call) {
+        return true
+     }
+
+
     String libFunctionName() {
         return 'buildFailureMessage'
     }
 
     void configure(helper, binding){
-        binding.setVariable("currentBuild", currentBuild)
+        binding.getVariable('currentBuild').previousBuild = [result: 'UNSTABLE']
+        //binding.setVariable("currentBuild", currentBuild)
     }
 }

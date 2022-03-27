@@ -20,7 +20,7 @@ class TestBuildFailureMessage extends BuildPipelineTest {
     }
 
     @Test
-    void testSignArtifacts() {
-        super.testPipeline("jobs/BuildFailureMessage_Jenkinsfile")
+    void testBuildFailureMsg() {
+        super.testPipeline("tests/jenkins/jobs/BuildFailureMessage_Jenkinsfile")
     }
 }
