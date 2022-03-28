@@ -21,7 +21,5 @@ class BuildFailureMessageLibTester extends LibFunctionTester {
     }
 
     void configure(helper, binding){
-        binding.getVariable('currentBuild').previousBuild = [result: 'UNSTABLE']
-        //binding.setVariable("currentBuild", currentBuild)
     }
 }

@@ -17,6 +17,7 @@ class TestBuildFailureMessage extends BuildPipelineTest {
     void setUp() {
         this.registerLibTester(new BuildFailureMessageLibTester())
         super.setUp()
+
     }
 
     @Test
