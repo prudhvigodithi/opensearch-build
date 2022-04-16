@@ -35,7 +35,7 @@ public class ZipMavenCoordinatesTask extends DefaultTask {
 		System.out.println("Successfully completed sample Task ZipMavenCoordinates");
 
     }
-	@SuppressWarnings("unchecked")
+	/*@SuppressWarnings("unchecked")
 	private static void setEnv(String key, String value) throws IllegalAccessException, NoSuchFieldException {
 		Class<?>[] classes = Collections.class.getDeclaredClasses();
 		Map<String, String> env = System.getenv();
@@ -48,6 +48,13 @@ public class ZipMavenCoordinatesTask extends DefaultTask {
 				map.put(key, value);
 			}
 		}
+	}*/
+	@SuppressWarnings({ "unchecked" })
+	public static void setEnv(String name, String val) throws ReflectiveOperationException {
+		Map<String, String> env = System.getenv();
+		Field field = env.getClass().getDeclaredField("m");
+		field.setAccessible(true);
+		((Map<String, String>) field.get(env)).put(name, val);
 	}
 
 }
