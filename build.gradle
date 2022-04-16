@@ -21,6 +21,13 @@ plugins {
     id 'jacoco'
 }
 
+/*apply plugin: 'zippublish'
+zipmavensettings{
+    zipVersion = '2.8.0.0-alpha1-SNAPSHOT'
+    zipArtifact = 'opensearch-job-scheduler'
+    zipFilePath = '/distributions/opensearch-job-scheduler-2.0.0.0-alpha1-SNAPSHOT.zip'
+}*/
+
 repositories {
     maven { url 'https://repo.jenkins-ci.org/releases/' }
     maven { url 'https://mvnrepository.com/artifact/' }
