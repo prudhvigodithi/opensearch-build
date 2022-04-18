@@ -1,8 +1,4 @@
 org/opensearch/gradle/zipplugin/ZipPublishExtension.java
  org.opensearch.gradle.zipplugin.ZipPublishExtension
-org/opensearch/gradle/zipplugin/ZipMavenCoordinatesTask.java
- org.opensearch.gradle.zipplugin.ZipMavenCoordinatesTask
-org/opensearch/gradle/zipplugin/ZipMavenCleanEnvTask.java
- org.opensearch.gradle.zipplugin.ZipMavenCleanEnvTask
 org/opensearch/gradle/zipplugin/ZipPublish.java
  org.opensearch.gradle.zipplugin.ZipPublish

@@ -1,0 +1,60 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.opensearch.gradle",
+    "module": "zipPlugin",
+    "version": "1.0",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.3.3"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "zipPlugin-1.0.jar",
+          "url": "zipPlugin-1.0.jar",
+          "size": 4506,
+          "sha512": "e8f7b9fc4254fc685ae95e08cc0619ea943b8a9508b9b8b1cfd009f36f64429a6b4e39eb1054d66ec0cce045bf4ec21b2bacd7a3a94abbb72dc0dcd7a06cbeb5",
+          "sha256": "ef81b2978636bc58431e598105734a5e96e4bc05a62435a0978cdce742e685dd",
+          "sha1": "169f45654b5b50c7833f5530dd595c8f92cd3db9",
+          "md5": "6ab3dc3ff0a9a275dc4e36a040457450"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 11,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "files": [
+        {
+          "name": "zipPlugin-1.0.jar",
+          "url": "zipPlugin-1.0.jar",
+          "size": 4506,
+          "sha512": "e8f7b9fc4254fc685ae95e08cc0619ea943b8a9508b9b8b1cfd009f36f64429a6b4e39eb1054d66ec0cce045bf4ec21b2bacd7a3a94abbb72dc0dcd7a06cbeb5",
+          "sha256": "ef81b2978636bc58431e598105734a5e96e4bc05a62435a0978cdce742e685dd",
+          "sha1": "169f45654b5b50c7833f5530dd595c8f92cd3db9",
+          "md5": "6ab3dc3ff0a9a275dc4e36a040457450"
+        }
+      ]
+    }
+  ]
+}

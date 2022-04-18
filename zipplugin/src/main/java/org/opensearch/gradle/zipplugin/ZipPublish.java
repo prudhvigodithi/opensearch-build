@@ -28,7 +28,7 @@ public class ZipPublish implements Plugin<Project> {
             publishing.repositories(repositories -> {
                 repositories.maven(maven -> {
                     maven.setName("zipstaging");
-                    maven.setUrl(buildDirectory.toString() + "/local-staging-repo");
+                    maven.setUrl(buildDirectory.toString() + "/build/local-staging-repo");
                 });
             });
             System.out.println("Starting publishMavenZipPublicationToZipstagingRepository task");
