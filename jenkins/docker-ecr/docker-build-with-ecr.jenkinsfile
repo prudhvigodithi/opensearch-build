@@ -46,56 +46,20 @@ pipeline {
         )
     }
     stages {
-        stage('check-params') {
+        stage('docker-login-check-staging') {
             steps {
                 script {
-                    if(DOCKER_BUILD_SCRIPT_WITH_COMMANDS == null
-                            || DOCKER_BUILD_SCRIPT_WITH_COMMANDS == '') {
-                                currentBuild.result = 'ABORTED'
-                                error('DOCKER_BUILD_SCRIPT_WITH_COMMANDS parameter is not set')
-                    }
+                    sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/s7t2w0j3'
+                    sh 'docker logout public.ecr.aws/s7t2w0j3'
                 }
             }
         }
-        stage('docker-build-dockerhub-staging') {
-            when{
-                expression { PLATFORM == 'docker-hub + ECR' || PLATFORM == 'docker-hub' }
-            }
+        stage('docker-login-check-prod') {
             steps {
                 script {
-                    git url: DOCKER_BUILD_GIT_REPOSITORY, branch: DOCKER_BUILD_GIT_REPOSITORY_REFERENCE
-                    def CREDENTIAL_ID = "jenkins-staging-docker-staging-credential"
-                    withCredentials([usernamePassword(credentialsId: CREDENTIAL_ID, usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh '''
-                                set -e
-                                docker logout && docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD && eval $DOCKER_BUILD_SCRIPT_WITH_COMMANDS
-                           '''
-                    }
+                    sh 'aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/p5f6l6i3'
+                    sh 'docker logout public.ecr.aws/p5f6l6i3'
                 }
-            }
-        }
-        stage('docker-ecr-staging') {
-            when {
-                expression { PLATFORM == 'docker-hub + ECR' || PLATFORM == 'ECR' }
-            }
-            steps {
-                script {
-                    copyContainer(
-                        sourceImagePath: "opensearchstaging/${IMAGE_REPOSITORY}:${IMAGE_TAG}",
-                        destinationImagePath: "public.ecr.aws/m0o1u6w1/${IMAGE_REPOSITORY}:${IMAGE_TAG}",
-                        destinationType: "ecr",
-                        destinationCredentialIdentifier: "public.ecr.aws/m0o1u6w1",
-                        accountName: "${AWS_ACCOUNT_PUBLIC}"
-                    )
-                }
-            }
-        }
-    }
-    post() {
-        always {
-            script {
-                postCleanup()
-                sh "docker logout && docker image prune -f --all"
             }
         }
     }
