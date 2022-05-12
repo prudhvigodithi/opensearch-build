@@ -4,13 +4,7 @@ pipeline {
     options {
         timeout(time: 1, unit: 'HOURS')
     }
-    agent {
-        docker {
-            label 'Jenkins-Agent-al2-x64-c54xlarge-Docker-Host'
-            image 'opensearchstaging/ci-runner:ubuntu2004-x64-docker-buildx0.6.3-qemu5.0-awscli1.22-jdk14'
-            args '-u root'
-        }
-    }
+    agent none
     parameters {
         string(
             name: 'IMAGE_REPOSITORY',
@@ -40,6 +34,13 @@ pipeline {
     }
 
     stages {
+        agent {
+            docker {
+                label 'Jenkins-Agent-al2-x64-c54xlarge-Docker-Host'
+                image 'opensearchstaging/ci-runner:ubuntu2004-x64-docker-buildx0.6.3-qemu5.0-awscli1.22-jdk14'
+                args '-u root -v /var/run/docker.sock:/var/run/docker.sock'
+            }
+        }
         stage('dockerhub-promote-to-prod') {
             when{
                 expression { return "$DOCKER_HUB".toBoolean() }
@@ -72,18 +73,18 @@ pipeline {
                 script {
                     copyContainer(
                         sourceImagePath: "opensearchstaging/${IMAGE_REPOSITORY}:${IMAGE_TAG}",
-                        destinationImagePath: "public.ecr.aws/p5f6l6i3/${IMAGE_REPOSITORY}:${IMAGE_TAG}",
+                        destinationImagePath: "public.ecr.aws/opensearchproject/${IMAGE_REPOSITORY}:${IMAGE_TAG}",
                         destinationType: "ecr",
-                        destinationCredentialIdentifier: "public.ecr.aws/p5f6l6i3",
+                        destinationCredentialIdentifier: "public.ecr.aws/opensearchproject",
                         accountName: "${AWS_ACCOUNT_ARTIFACT}"
                     )
                     if("$TAG_LATEST".toBoolean()){
                         echo "Tagging with latest."
                         copyContainer(
                             sourceImagePath: "opensearchstaging/${IMAGE_REPOSITORY}:${IMAGE_TAG}",
-                            destinationImagePath: "public.ecr.aws/p5f6l6i3/${IMAGE_REPOSITORY}:latest",
+                            destinationImagePath: "public.ecr.aws/opensearchproject/${IMAGE_REPOSITORY}:latest",
                             destinationType: "ecr",
-                            destinationCredentialIdentifier: "public.ecr.aws/p5f6l6i3",
+                            destinationCredentialIdentifier: "public.ecr.aws/opensearchproject",
                             accountName: "${AWS_ACCOUNT_ARTIFACT}"
                         )
                     }
