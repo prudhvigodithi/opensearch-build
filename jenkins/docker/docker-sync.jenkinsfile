@@ -27,12 +27,11 @@ pipeline {
                                         sh """
 
 
-
-                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.3 public.ecr.aws/opensearchproject/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.3
-                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.2 public.ecr.aws/opensearchproject/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.2
-                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.1 public.ecr.aws/opensearchproject/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.1
-                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.4 public.ecr.aws/opensearchproject/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.4
-                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.2 public.ecr.aws/opensearchproject/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.2
+                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.3 public.ecr.aws/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.3
+                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.2 public.ecr.aws/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.2
+                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.1 public.ecr.aws/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.16.1
+                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.4 public.ecr.aws/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.4
+                                                gcrane cp opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.2 public.ecr.aws/opensearchproject/logstash-oss-with-opensearch-output-plugin:7.13.2
                                         """
                                     }
                                 }
