@@ -18,7 +18,7 @@ pipeline {
                 stage('Image sync') {
                     steps {
                         script {
-                                def ecrLogin = sh(returnStdout: true, script: "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${args.destinationRegistry}").trim()
+                                def ecrLogin = sh(returnStdout: true, script: "aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/opensearchstaging").trim()
                                 sh """
                                         grcrane cp opensearchstaging/opensearch-dashboards:2.1.0 public.ecr.aws/opensearchstaging/opensearch-dashboards:2.1.0
                                         grcrane cp opensearchstaging/opensearch-dashboards:3.0.0 public.ecr.aws/opensearchstaging/opensearch-dashboards:3.0.0
