@@ -62,6 +62,7 @@ jobs:
         uses: peter-evans/create-pull-request@v4
         with:
           token: ${{ steps.github_app_token.outputs.token }}
+          committer: opensearch-ci-bot <opensearch-infra@amazon.com>
           author: opensearch-ci-bot <opensearch-infra@amazon.com>
           commit-message: |
             Increment version to ${{ env.OPENSEARCH_VERSION }}
