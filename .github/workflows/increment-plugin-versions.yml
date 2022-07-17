@@ -21,28 +21,10 @@ jobs:
       fail-fast: false
       matrix:
         entry:
-          - {repo: alerting}
-          - {repo: anomaly-detection}
-          - {repo: asynchronous-search}
-          - {repo: common-utils}
-          - {repo: cross-cluster-replication}
           - {repo: dashboards-reports, path: reports-scheduler}
-          - {repo: geospatial}
-          - {repo: index-management}
-          - {repo: job-scheduler}
-          - {repo: k-NN}
-          - {repo: ml-commons}
-          - {repo: notifications, path: notifications}
-          - {repo: observability, path: opensearch-observability}
-          - {repo: performance-analyzer}
-          - {repo: performance-analyzer-rca}
-          - {repo: security}
           - {repo: sql}
         branch:
           - 'main'
-          - '2.x'
-          - '2.1'
-          - '2.2'
     steps:
       - name: Check out OpenSearch repo
         uses: actions/checkout@v3
@@ -68,11 +50,18 @@ jobs:
             cd ${{ matrix.entry.path }}
           fi
           ./gradlew updateVersion -DnewVersion=${{ env.OPENSEARCH_VERSION }}
+      - name: GitHub App token
+        id: github_app_token
+        uses: tibdex/github-app-token@v1.6.0
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+          installation_id: 27448020
       - name: Create Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v4
         with:
-          token: ${{ secrets.CIBOTAUTOPR }}
+          token: ${{ steps.github_app_token.outputs.token }}
           author: opensearch-ci-bot <opensearch-infra@amazon.com>
           commit-message: |
             Increment version to ${{ env.OPENSEARCH_VERSION }}
