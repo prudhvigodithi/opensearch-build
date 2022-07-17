@@ -40,7 +40,7 @@ jobs:
       - name: Check out plugin repo
         uses: actions/checkout@v3
         with:
-          repository: opensearch-project/${{ matrix.entry.repo }}
+          repository: prudhvigodithi/${{ matrix.entry.repo }}
           ref: ${{ matrix.branch }}
       - name: Increment Version in ${{ matrix.entry.repo }}
         run: |
