@@ -135,9 +135,25 @@ class TestInputManifests(unittest.TestCase):
 
     @patch("builtins.open", new_callable=mock_open)
     @patch("manifests_workflow.input_manifests.InputManifests.add_to_versionincrement_workflow")
-    def test_add_to_versionincrement_workflow(self, *mocks: Any) -> None:
+    def test_add_to_versionincrement_workflow(self, mock_open: MagicMock, mock_update_workflow: MagicMock) -> None:
         input_manifests = InputManifests("test")
-        input_manifests.add_to_versionincrement_workflow('0.1.2')
+        self.assertTrue(input_manifests.add_to_versionincrement_workflow('1.1.2'))
+    
+    def test_versionincrement_workflow_updates_yaml():
+        ## Yaml File is updated
+        pass
+    
+    def test_versionincrement_workflow_no_changes():
+        ## No changes if entry exists
+        pass
+    
+    def test_versionincrement_workflow_add_branch_with_x():
+        ## Update the Yaml with branch x
+        pass
+    
+    def test_versionincrement_workflow_add_branch_with_number():
+        ## Update the Yaml with branch number
+        pass
 
     def test_create_manifest_with_components(self) -> None:
         pass
