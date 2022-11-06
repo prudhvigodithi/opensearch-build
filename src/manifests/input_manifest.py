@@ -104,11 +104,10 @@ class InputManifest(ComponentManifest['InputManifest', 'InputComponents']):
 
     def __init__(self, data: dict) -> None:
         super().__init__(data)
-
         self.build = self.Build(data["build"])
         self.ci = self.Ci(data.get("ci", None))
 
-        self.components = InputComponents(data.get("components", []))  # type: ignore[assignment]
+        self.components = InputComponents(data.get("components", []))
 
     def __to_dict__(self) -> dict:
         return {

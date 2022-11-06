@@ -95,6 +95,9 @@ class InputManifests(Manifests):
                 # components can increment their own version first without incrementing min
                 manifest = self.latest
                 logging.info(f"Examining components in the latest manifest of {manifest.build.name} ({manifest.build.version})")
+                logging.info("###########################")
+                logging.info(manifest.components.values())
+                logging.info("###########################")
                 for component in manifest.components.values():
                     if component.name == self.name:
                         continue
