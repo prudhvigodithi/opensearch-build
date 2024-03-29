@@ -10,7 +10,7 @@ ci:
 components:
   - name: OpenSearch
     repository: https://github.com/opensearch-project/OpenSearch.git
-    ref: '2.x'
+    ref: 7ec678d1b7c87d6e779fdef94e33623e1f1e2647
   - name: common-utils
     repository: https://github.com/opensearch-project/common-utils.git
     ref: 937bc4ecdf5ff07a1087b259c330c9b361db5c32
@@ -25,7 +25,7 @@ components:
       - windows
   - name: security
     repository: https://github.com/opensearch-project/security.git
-    ref: 1c839ad804fe891f9e0ead899f5405ab149e0bc2
+    ref: 8f029ebc9753888d9009547e26cada1a71a81585
     platforms:
       - linux
       - windows
@@ -37,7 +37,7 @@ components:
       - windows
   - name: geospatial
     repository: https://github.com/opensearch-project/geospatial.git
-    ref: 106d1d673a4da996f257c50f98c3e0dc0861458d
+    ref: ae663a1f5dc0bec3cd1e1e43907336c5522100ae
     platforms:
       - linux
       - windows
@@ -53,7 +53,7 @@ components:
       - common-utils
   - name: ml-commons
     repository: https://github.com/opensearch-project/ml-commons.git
-    ref: 2365afc7945ce2c214ba1f5aec5ac06c17b9610a
+    ref: 493e394628e0c7598f32fc103e8470636115c06e
     platforms:
       - linux
       - windows
@@ -70,7 +70,7 @@ components:
       - k-NN
   - name: notifications-core
     repository: https://github.com/opensearch-project/notifications.git
-    ref: 63d6865fc747555966aa79ee801e7631c756004c
+    ref: d7f36a416b5c16000f6e367c6c4a78e2c92e1093
     platforms:
       - linux
       - windows
@@ -79,7 +79,7 @@ components:
       - common-utils
   - name: notifications
     repository: https://github.com/opensearch-project/notifications.git
-    ref: 63d6865fc747555966aa79ee801e7631c756004c
+    ref: d7f36a416b5c16000f6e367c6c4a78e2c92e1093
     platforms:
       - linux
       - windows
@@ -138,7 +138,7 @@ components:
       - common-utils
   - name: security-analytics
     repository: https://github.com/opensearch-project/security-analytics.git
-    ref: d3af2426bc2b3697c3a854fb3b24a76ba333640a
+    ref: 692a75ea1f8ec4e306bc46d3296d437563c07f6f
     platforms:
       - linux
       - windows
@@ -146,7 +146,7 @@ components:
       - common-utils
   - name: index-management
     repository: https://github.com/opensearch-project/index-management.git
-    ref: fa8d1b3cf484a08e7526ceb2b53a97d9c49b82c4
+    ref: 648cfc6ab8ae49835bfd4b70a6e79832296fab3e
     platforms:
       - linux
       - windows
@@ -166,7 +166,7 @@ components:
       - windows
   - name: flow-framework
     repository: https://github.com/opensearch-project/flow-framework.git
-    ref: 9782e5ffc4d10a4fbd75279b5ce5393795f82578
+    ref: 478bb7eae139064b41f5af15712022a2f5415dc7
     platforms:
       - linux
       - windows
