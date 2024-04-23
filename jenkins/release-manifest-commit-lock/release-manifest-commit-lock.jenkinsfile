@@ -80,7 +80,7 @@ pipeline {
                         selectedComponents.each { componentName ->
                             def existingComponent = existingManifest.components.find { it.name == componentName.name }
                             if (existingComponent) {
-                                def newComponentRef = buildManifest.components.find { it.name == componentName.name }?.ref
+                                def newComponentRef = buildManifest.components.find { it.name == componentName.name }?.commit_id
                                 if (newComponentRef) {
                                     existingComponent.ref = newComponentRef
                                 }
@@ -135,18 +135,18 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'jenkins-github-bot-token', passwordVariable: 'GITHUB_TOKEN', usernameVariable: 'GITHUB_USER')]) {
                         try {
                             sh """
-                                git remote set-url origin "https://opensearch-ci:${GITHUB_TOKEN}@github.com/opensearch-project/opensearch-build"
-                                git config user.email "opensearch-infra@amazon.com"
-                                git config user.name "opensearch-ci"
-                                git checkout -b manifest-lock
+                                git remote set-url origin "https://prudhvigodithi:${GITHUB_TOKEN}@github.com/prudhvigodithi/opensearch-build"
+                                git config user.email "pgodithi@amazon.com"
+                                git config user.name "prudhvigodithi"
+                                git checkout -b manifest-lock-test
                             """
                             def status = sh(returnStdout: true, script: 'git status --porcelain')
                             if (status) {
                                 sh """
                                     git status --porcelain | grep '^ M' | cut -d " " -f3 | xargs git add
                                     git commit -sm "Manifest Commit Lock for Release ${params.RELEASE_VERSION}"
-                                    git push origin manifest-lock --force
-                                    gh pr create --title '[${params.RELEASE_VERSION}] Manifest Commit Lock with action ${params.MANIFEST_LOCK_ACTION}' --body 'Manifest Commit Lock for Release ${params.RELEASE_VERSION} ' -H manifest-lock -B main
+                                    git push origin manifest-lock-test --force
+                                    gh pr create --title '[${params.RELEASE_VERSION}] Manifest Commit Lock with action ${params.MANIFEST_LOCK_ACTION}' --body 'Manifest Commit Lock for Release ${params.RELEASE_VERSION} ' -H manifest-lock-test -B manifest-lock
                                 """
                             } else {
                                 println 'Nothing to commit!'
