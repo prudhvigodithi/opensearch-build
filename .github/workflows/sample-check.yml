@@ -39,12 +39,13 @@ jobs:
           echo "pr_number=$(jq --raw-output .pull_request.number $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
           echo "pr_owner=$(jq --raw-output .pull_request.user.login $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
           echo "pr_or_commit_description=$(jq --ascii-output .pull_request.body $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
-
+          echo 'post_merge_action=false' >> $GITHUB_ENV
           cat $GITHUB_ENV
       - uses: actions/github-script@v7
         if: github.event_name == 'push'
         id: get_pr_data
         with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
               return (
                 await github.rest.repos.listPullRequestsAssociatedWithCommit({
@@ -68,4 +69,5 @@ jobs:
           echo "pr_owner=$(jq --raw-output '.commits[0].author.username' $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
           echo 'pr_number=${{ fromJson(steps.get_pr_data.outputs.result).number }}' >> $GITHUB_ENV
           echo "pr_or_commit_description=$(jq --ascii-output .head_commit.message $GITHUB_EVENT_PATH)" >> $GITHUB_ENV
+          echo 'post_merge_action=true' >> $GITHUB_ENV
           cat $GITHUB_ENV
